@@ -8,25 +8,17 @@ import {
   Link,
   Outlet,
 } from "react-router-dom";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
-import { Box, Text } from "@chakra-ui/react";
-import Navbar from "./components/Navbar";
-import AboutNumemo from "./components/AboutNumemo";
-import NumberMemo from "./components/NumberMemo";
+import "App.css";
+import AboutNumemo from "components/AboutNumemo";
+import NumberMemo from "components/NumberMemo";
+import { Header } from "components/Header";
 
-const Dashboard = () => {
+const Content = () => {
   return (
-    <div>
+    <div className="container mx-auto p-3">
       <Outlet />
     </div>
   );
-};
-const DashboardMessages = () => {
-  return <div>DashBoardMessages</div>;
-};
-const DashboardTasks = () => {
-  return <div>DashBoardTasks</div>;
 };
 
 const App: FC = () => {
@@ -37,13 +29,11 @@ const App: FC = () => {
   }, [hash, pathname]);
 
   return (
-    <div className="App">
-      <Navbar />
+    <div className="App h-screen overflow-hidden">
+      <Header />
       <Routes>
-        <Route path="/" element={<Dashboard />}>
+        <Route path="/" element={<Content />}>
           <Route index element={<NumberMemo />} />
-          <Route path="messages" element={<DashboardMessages />} />
-          <Route path="tasks" element={<DashboardTasks />} />
           <Route path="about" element={<AboutNumemo />} />
         </Route>
       </Routes>

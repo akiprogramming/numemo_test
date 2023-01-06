@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import {
   Center,
   NumberInput,
@@ -8,14 +8,24 @@ import {
   NumberDecrementStepper,
   Text,
 } from "@chakra-ui/react";
+import Keyboard from "./Keyboard";
+import { Input } from "components/Input";
 
 function NumberMemo() {
   const [num1, setNum1] = useState(3);
   const [num2, setNum2] = useState(4);
+  const [input1, setInput1] = useState("");
+
+  let input = "";
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.dir(e.target);
+    console.dir(e.target.value);
+    setInput1(e.target.value);
+  };
 
   return (
     <>
-      <p>NUMEMOこれからがんばります＾＾</p>
+      {/* <p>NUMEMOこれからがんばります＾＾</p>
       <Center>
         <NumberInput
           placeholder="(^^)"
@@ -57,7 +67,9 @@ function NumberMemo() {
         >
           {num1 + num2}
         </Text>
-      </Center>
+      </Center> */}
+      <Input input={input1} handleChange={handleChange} />
+      {/* <Keyboard /> */}
     </>
   );
 }

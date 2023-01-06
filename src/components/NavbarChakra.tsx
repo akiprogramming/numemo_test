@@ -27,7 +27,7 @@ import {
   NavLink,
 } from "react-router-dom";
 
-function Navbar() {
+export function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -118,5 +118,3 @@ function Navbar() {
     </>
   );
 }
-
-export default Navbar;
