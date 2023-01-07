@@ -21,10 +21,6 @@ function NumberMemo() {
     setInput1(e.target.value);
   };
 
-  const handleClickKeyboard = (value: string) => {
-    setInput1(input1 + value);
-  };
-
   return (
     <>
       {/* <p>NUMEMOこれからがんばります＾＾</p>
@@ -71,7 +67,7 @@ function NumberMemo() {
         </Text>
       </Center> */}
       <InputAndOutput input={input1} handleChange={handleChange} />
-      <Keyboard handleClickKeyboard={handleClickKeyboard} />
+      <Keyboard setData={setInput1} currentValue={input1} />
     </>
   );
 }

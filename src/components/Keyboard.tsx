@@ -1,8 +1,12 @@
 type Props = {
-  handleClickKeyboard: (value: string) => void;
+  setData: (value: string) => void;
+  currentValue: string;
 };
 
-export function Keyboard({ handleClickKeyboard }: Props) {
+export function Keyboard({ setData, currentValue }: Props) {
+  const handleClickKeyboard = (value: string) => {
+    setData(currentValue + value);
+  };
   return (
     <div>
       {[
