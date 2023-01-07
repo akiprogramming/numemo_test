@@ -30,17 +30,21 @@ function toOutput(input: string[]): string {
   return output;
 }
 
-function calculate(input: string[]): string {
-  if (!input.length) return "";
+function calculate(input: string[]): number | null {
+  if (!input.length) return null;
   const inputStr = input.join("");
   const isCorrectExpression = inputStr.match(
     /^([0-9]+[\+\-\*\/~\(\)\{\}\.])+[0-9]+$/
   );
 
-  if (!isCorrectExpression) return "";
-  const result = Function("return (" + inputStr + ");")();
+  if (!isCorrectExpression) return null;
+  const sum = Function("return (" + inputStr + ");")();
 
-  return result;
+  return sum;
+}
+
+function formatCommaNumber(num: number) {
+  return num.toLocaleString("en-US");
 }
 
 export function Input({ input, handleChange = (e) => {} }: Props) {
@@ -58,7 +62,7 @@ export function Input({ input, handleChange = (e) => {} }: Props) {
         onChange={handleChange}
       />
       <div className="mt-5 w-full rounded-full bg-blue-400 px-3 py-2 text-gray-700">
-        {sum || "　"}
+        {sum ? formatCommaNumber(sum) : "　"}
       </div>
     </div>
   );
