@@ -47,6 +47,7 @@ export function Input({ input, handleChange = (e) => {} }: Props) {
   const outputArray = toOutputArray(input);
   const output = toOutput(outputArray);
   const sum = calculate(outputArray);
+
   return (
     <div>
       <input
@@ -56,8 +57,8 @@ export function Input({ input, handleChange = (e) => {} }: Props) {
         value={output}
         onChange={handleChange}
       />
-      <div className="mt-5 w-full rounded-full bg-blue-400 px-3 py-2">
-        {sum}
+      <div className="mt-5 w-full rounded-full bg-blue-400 px-3 py-2 text-gray-700">
+        {sum || "　"}
       </div>
     </div>
   );

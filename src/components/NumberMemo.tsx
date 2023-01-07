@@ -8,8 +8,8 @@ import {
   NumberDecrementStepper,
   Text,
 } from "@chakra-ui/react";
-import Keyboard from "./Keyboard";
-import { Input } from "components/Input";
+import { Input as InputAndOutput } from "components/Input";
+import { Keyboard } from "components/Keyboard";
 
 function NumberMemo() {
   const [num1, setNum1] = useState(3);
@@ -18,9 +18,11 @@ function NumberMemo() {
 
   let input = "";
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.dir(e.target);
-    console.dir(e.target.value);
     setInput1(e.target.value);
+  };
+
+  const handleClickKeyboard = (value: string) => {
+    setInput1(input1 + value);
   };
 
   return (
@@ -68,8 +70,8 @@ function NumberMemo() {
           {num1 + num2}
         </Text>
       </Center> */}
-      <Input input={input1} handleChange={handleChange} />
-      {/* <Keyboard /> */}
+      <InputAndOutput input={input1} handleChange={handleChange} />
+      <Keyboard handleClickKeyboard={handleClickKeyboard} />
     </>
   );
 }
