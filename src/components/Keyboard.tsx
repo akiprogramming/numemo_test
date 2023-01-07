@@ -22,8 +22,8 @@ export function Keyboard({ setData, currentValue }: Props) {
         "0",
         "+",
         "-",
-        "*",
-        "/",
+        "×",
+        "÷",
       ].map((v) => {
         return (
           <button

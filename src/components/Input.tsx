@@ -6,13 +6,15 @@ type Props = {
 };
 
 function toOutputArray(input: string): string[] {
-  let targetInput = input;
+  let targetInput = input.replaceAll("×", "*");
+  targetInput = input.replaceAll("÷", "/");
   let outputArray = [];
   while (targetInput) {
     const trimmedInput = targetInput.trim();
-    const matchedNumber = trimmedInput.match(/^[0-9]+/);
-    const matchedMathOperation = trimmedInput.match(/^[+-/*//]+/);
-    const extractTarget = matchedNumber?.[0] ?? matchedMathOperation?.[0];
+    const firstMatchedNumber = trimmedInput.match(/^[0-9]+/);
+    const firstMatchedMathOperation = trimmedInput.match(/^[+-/*//]+/);
+    const extractTarget =
+      firstMatchedNumber?.[0] ?? firstMatchedMathOperation?.[0];
     console.count("loop");
     console.log("ext:", extractTarget);
     if (!extractTarget) break;
@@ -26,7 +28,9 @@ function toOutputArray(input: string): string[] {
 }
 
 function toOutput(input: string[]): string {
-  const output = input.join(" ");
+  let replacedArray = input.map((v) => (v === "*" ? "×" : v));
+  replacedArray = replacedArray.map((v) => (v === "/" ? "÷" : v));
+  const output = replacedArray.join(" ");
   return output;
 }
 
