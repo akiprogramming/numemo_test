@@ -1,4 +1,5 @@
 import { Dispatch, memo, SetStateAction } from "react";
+import { RiDeleteBack2Line } from "react-icons/ri";
 
 type Props = {
   setData: Dispatch<SetStateAction<string>>;
@@ -8,7 +9,7 @@ const btnDisplayOrder = [
   ...[" ", " ", "7", "8", "9", "÷"],
   ...[" ", " ", "4", "5", "6", "×"],
   ...[" ", " ", "1", "2", "3", "-"],
-  ...[" ", " ", "0", "C", " ", "+"],
+  ...[" ", "C", "0", " ", "B", "+"],
 ];
 
 export const Keyboard = memo(({ setData }: Props) => {
@@ -30,6 +31,20 @@ export const Keyboard = memo(({ setData }: Props) => {
                 className="m-1 h-10 w-10 rounded-xl bg-teal-300 shadow-md transition-all active:bg-teal-100 active:shadow-none"
               >
                 {btn}
+              </button>
+            );
+          case "B":
+            return (
+              <button
+                key={btn}
+                onClick={() => {
+                  setData((prevValue) => {
+                    return prevValue.slice(0, prevValue.length - 1);
+                  });
+                }}
+                className="m-1 h-10 w-10 rounded-xl bg-teal-300 shadow-md transition-all active:bg-teal-100 active:shadow-none"
+              >
+                <RiDeleteBack2Line className="mx-auto" />
               </button>
             );
           case " ":
