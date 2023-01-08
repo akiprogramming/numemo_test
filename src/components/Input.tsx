@@ -15,15 +15,15 @@ function toOutputArray(input: string): string[] {
     const firstMatchedMathOperation = trimmedInput.match(/^[+-/*//]+/);
     const extractTarget =
       firstMatchedNumber?.[0] ?? firstMatchedMathOperation?.[0];
-    console.count("loop");
-    console.log("ext:", extractTarget);
+    // console.count("loop");
+    // console.log("ext:", extractTarget);
     if (!extractTarget) break;
     targetInput = targetInput.replace(extractTarget, "");
-    console.log("rest: ", targetInput);
+    // console.log("rest: ", targetInput);
     outputArray.push(extractTarget);
   }
-  console.countReset("loop");
-  console.log(outputArray);
+  //   console.countReset("loop");
+  //   console.log(outputArray);
   return outputArray;
 }
 

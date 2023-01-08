@@ -1,6 +1,7 @@
+import { Dispatch, memo, SetStateAction } from "react";
+
 type Props = {
-  setData: (value: string) => void;
-  currentValue: string;
+  setData: Dispatch<SetStateAction<string>>;
 };
 
 const btnDisplayOrder = [
@@ -10,12 +11,13 @@ const btnDisplayOrder = [
   ...[" ", " ", "0", "C", " ", "+"],
 ];
 
-export function Keyboard({ setData, currentValue }: Props) {
+export const Keyboard = memo(({ setData }: Props) => {
   const handleClickKeyboard = (value: string) => {
-    setData(currentValue + value);
+    setData((prevValue) => prevValue + value);
   };
+
   return (
-    <div className="mx-auto grid max-w-fit select-none grid-cols-6 grid-rows-4 items-center gap-0">
+    <div className="mx-auto grid max-w-fit select-none grid-cols-6 grid-rows-4 items-center gap-0  text-slate-600">
       {btnDisplayOrder.map((btn, i) => {
         switch (btn) {
           case "C":
@@ -25,7 +27,7 @@ export function Keyboard({ setData, currentValue }: Props) {
                 onClick={() => {
                   setData("");
                 }}
-                className="m-1 h-10 w-10 rounded-md bg-teal-300 shadow-md transition-all active:bg-teal-100 active:shadow-none"
+                className="m-1 h-10 w-10 rounded-xl bg-teal-300 shadow-md transition-all active:bg-teal-100 active:shadow-none"
               >
                 {btn}
               </button>
@@ -35,7 +37,7 @@ export function Keyboard({ setData, currentValue }: Props) {
             return (
               <span
                 key={`empty${i}`}
-                className=" mx-auto h-10 w-10 rounded-md bg-slate-300 shadow-md transition-all active:shadow-none"
+                className=" mx-auto h-10 w-10 rounded-xl bg-slate-300 shadow-md transition-all active:shadow-none"
               ></span>
             );
           default:
@@ -43,7 +45,7 @@ export function Keyboard({ setData, currentValue }: Props) {
               <button
                 key={`btn${btn}`}
                 onClick={() => handleClickKeyboard(btn)}
-                className=" mx-auto h-10 w-10 rounded-md bg-teal-300 shadow-md transition-all active:bg-teal-100 active:shadow-none"
+                className="mx-auto h-10 w-10 rounded-xl bg-teal-300 shadow-md transition-all active:bg-teal-100 active:shadow-none"
               >
                 {btn}
               </button>
@@ -71,4 +73,4 @@ export function Keyboard({ setData, currentValue }: Props) {
         })} */}
     </div>
   );
-}
+});
