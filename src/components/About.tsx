@@ -4,7 +4,7 @@ import { Box, Text } from "@chakra-ui/react";
 const ROADMAP_TASKS = [
   { name: "ローカルDB保存", done: false },
   { name: "ログイン/DB保存", done: false },
-  { name: "キーボード並び順カスタム", done: false },
+  { name: "キーボード並び順カスタム", done: true },
 ];
 
 function About() {
@@ -28,9 +28,11 @@ function About() {
           return (
             <li key={task.name}>
               <input
+                key={task.name}
                 type="checkbox"
-                className="mr-2 checked:bg-blue-500"
-                checked={task.done}
+                className={` mr-2  ${task.done ? "line-through" : ""}`}
+                defaultChecked={task.done}
+                readOnly
               />
               {task.name}
             </li>
