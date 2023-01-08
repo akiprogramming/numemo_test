@@ -8,6 +8,8 @@ type Props = {
 function toOutputArray(input: string): string[] {
   let targetInput = input.replaceAll("×", "*");
   targetInput = targetInput.replaceAll("÷", "/");
+  targetInput = targetInput.replaceAll(",", "");
+
   let outputArray = [];
   while (targetInput) {
     // console.count("loop");
@@ -30,6 +32,9 @@ function toOutputArray(input: string): string[] {
 function toOutput(input: string[]): string {
   let replacedArray = input.map((v) => (v === "*" ? "×" : v));
   replacedArray = replacedArray.map((v) => (v === "/" ? "÷" : v));
+  replacedArray = replacedArray.map((v) =>
+    parseFloat(v) ? formatCommaNumber(parseFloat(v)) : v
+  );
   const output = replacedArray.join(" ");
   return output;
 }
