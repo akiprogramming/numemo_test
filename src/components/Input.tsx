@@ -7,15 +7,15 @@ type Props = {
 
 function toOutputArray(input: string): string[] {
   let targetInput = input.replaceAll("×", "*");
-  targetInput = input.replaceAll("÷", "/");
+  targetInput = targetInput.replaceAll("÷", "/");
   let outputArray = [];
   while (targetInput) {
+    // console.count("loop");
     const trimmedInput = targetInput.trim();
     const firstMatchedNumber = trimmedInput.match(/^[0-9]+/);
     const firstMatchedMathOperation = trimmedInput.match(/^[+-/*//]+/);
     const extractTarget =
       firstMatchedNumber?.[0] ?? firstMatchedMathOperation?.[0];
-    // console.count("loop");
     // console.log("ext:", extractTarget);
     if (!extractTarget) break;
     targetInput = targetInput.replace(extractTarget, "");
