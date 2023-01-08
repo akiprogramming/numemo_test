@@ -47,6 +47,9 @@ function calculate(input: string[]): number | null {
     /^([0-9]+[\+\-\*\/~\(\)\{\}\.])+[0-9]+$/
   );
 
+  console.log(inputStr);
+  console.log(isCorrectExpression);
+
   if (!isCorrectExpression) return null;
   const sum = Function("return (" + inputStr + ");")();
 
@@ -72,7 +75,7 @@ export function Input({ input, handleChange = (e) => {} }: Props) {
         onChange={handleChange}
       />
       <div className="mt-5 w-full rounded-full bg-blue-400 px-3 py-2 text-gray-700">
-        {sum ? formatCommaNumber(sum) : "　"}
+        {sum !== null ? formatCommaNumber(sum) : "　"}
       </div>
     </div>
   );
