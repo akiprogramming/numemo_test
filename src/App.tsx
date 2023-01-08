@@ -9,7 +9,7 @@ import {
   Outlet,
 } from "react-router-dom";
 import "App.css";
-import AboutNumemo from "components/AboutNumemo";
+import About from "components/About";
 import NumberMemo from "components/NumberMemo";
 import { Header } from "components/Header";
 
@@ -34,7 +34,7 @@ const App: FC = () => {
       <Routes>
         <Route path="/" element={<Content />}>
           <Route index element={<NumberMemo />} />
-          <Route path="about" element={<AboutNumemo />} />
+          <Route path="about" element={<About />} />
         </Route>
       </Routes>
     </div>
