@@ -1,3 +1,3 @@
-export const isNumber = (x: string): boolean => {
+export const canBeNumber = (x: string): boolean => {
   return !!parseFloat(x);
 };

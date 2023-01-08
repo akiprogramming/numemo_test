@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent } from "react";
-import { isNumber } from "utils/number";
+import { canBeNumber } from "utils/number";
 
 type Props = {
   input: string;
@@ -34,7 +34,7 @@ function toOutput(input: string[]): string {
   let replacedArray = input.map((v) => (v === "*" ? "×" : v));
   replacedArray = replacedArray.map((v) => (v === "/" ? "÷" : v));
   const outputWithComma = replacedArray.map((v) =>
-    isNumber(v) ? formatCommaNumber(parseFloat(v)) : v
+    canBeNumber(v) ? formatCommaNumber(parseFloat(v)) : v
   );
   const output = outputWithComma.join(" ");
   return output;
