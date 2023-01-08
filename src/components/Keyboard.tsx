@@ -18,7 +18,7 @@ export const Keyboard = memo(({ setData }: Props) => {
   };
 
   return (
-    <div className="mx-auto grid max-w-fit select-none grid-cols-6 grid-rows-4 items-center gap-0  text-slate-600">
+    <div className="mx-auto mt-2 grid w-screen max-w-fit select-none grid-cols-6 grid-rows-4 items-center gap-2  text-slate-600">
       {btnDisplayOrder.map((btn, i) => {
         switch (btn) {
           case "C":
@@ -28,7 +28,7 @@ export const Keyboard = memo(({ setData }: Props) => {
                 onClick={() => {
                   setData("");
                 }}
-                className="m-1 h-10 w-10 rounded-xl bg-teal-300 shadow-md transition-all active:bg-teal-100 active:shadow-none"
+                className="h-full w-full rounded-xl bg-neutral-100 shadow-md transition-all active:bg-neutral-50 active:shadow-none"
               >
                 {btn}
               </button>
@@ -42,9 +42,9 @@ export const Keyboard = memo(({ setData }: Props) => {
                     return prevValue.slice(0, prevValue.length - 1);
                   });
                 }}
-                className="m-1 h-10 w-10 rounded-xl bg-teal-300 shadow-md transition-all active:bg-teal-100 active:shadow-none"
+                className="h-full w-full rounded-xl bg-neutral-100 shadow-md transition-all active:bg-neutral-50 active:shadow-none"
               >
-                <RiDeleteBack2Line className="mx-auto" />
+                <RiDeleteBack2Line className="mx-auto max-h-fit max-w-fit" />
               </button>
             );
           case " ":
@@ -52,7 +52,7 @@ export const Keyboard = memo(({ setData }: Props) => {
             return (
               <span
                 key={`empty${i}`}
-                className=" mx-auto h-10 w-10 rounded-xl bg-slate-300 shadow-md transition-all active:shadow-none"
+                className=" mx-auto h-10 w-10 rounded-xl bg-slate-200 shadow-md transition-all active:shadow-none"
               ></span>
             );
           default:
@@ -60,32 +60,13 @@ export const Keyboard = memo(({ setData }: Props) => {
               <button
                 key={`btn${btn}`}
                 onClick={() => handleClickKeyboard(btn)}
-                className="mx-auto h-10 w-10 rounded-xl bg-teal-300 shadow-md transition-all active:bg-teal-100 active:shadow-none"
+                className="mx-auto h-full w-full rounded-xl bg-neutral-100 shadow-md transition-all active:bg-neutral-50 active:shadow-none"
               >
                 {btn}
               </button>
             );
         }
       })}
-
-      {/* {[
-          {
-            label: "C",
-            pressFunc: () => {
-              setData("");
-            },
-          },
-        ].map((btn) => {
-          return (
-            <button
-              key={btn.label}
-              onClick={btn.pressFunc}
-              className="m-1 h-10 w-10 rounded-md bg-teal-300 shadow-md transition-all active:bg-teal-100 active:shadow-none"
-            >
-              {btn.label}
-            </button>
-          );
-        })} */}
     </div>
   );
 });
