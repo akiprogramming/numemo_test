@@ -12,7 +12,7 @@ export function Header() {
   };
 
   return (
-    <header className="select-none border-b-2 border-gray-300 text-gray-700">
+    <header className="active:none select-none border-b-2 border-gray-300 text-gray-700">
       <div className="container mx-auto flex max-w-4xl flex-row items-center px-3 py-2 sm:py-3 md:py-5">
         <NavLink to="/">
           <span className="font-bold text-gray-700">NUMEMO</span>
