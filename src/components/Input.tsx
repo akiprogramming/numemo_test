@@ -66,7 +66,7 @@ export function Input({ input, handleChange = (e) => {} }: Props) {
   const sum = calculate(outputArray);
 
   return (
-    <div>
+    <div className="container mx-auto max-w-4xl">
       <input
         type="text"
         className="w-full rounded-full bg-blue-200 px-3 py-2"
