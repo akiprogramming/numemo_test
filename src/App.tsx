@@ -15,7 +15,7 @@ import { Header } from "components/Header";
 
 const Content = () => {
   return (
-    <div className="container mx-auto p-3">
+    <div className="mx-auto p-3">
       <Outlet />
     </div>
   );
