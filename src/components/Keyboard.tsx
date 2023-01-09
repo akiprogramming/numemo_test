@@ -18,7 +18,7 @@ export const Keyboard = memo(({ setData }: Props) => {
   };
 
   return (
-    <div className="mx-auto mt-2 aspect-[6/4]  w-full max-w-xl select-none text-sm text-slate-600 sm:text-lg  md:text-xl">
+    <div className="fixed left-1/2 bottom-0 aspect-[6/4] w-full max-w-xl translate-x-[-50%] select-none p-2 text-sm text-slate-600 sm:text-lg  md:text-xl">
       <div className="grid h-full w-full grid-cols-6 grid-rows-4 items-center gap-2">
         {btnDisplayOrder.map((btn, i) => {
           switch (btn) {
