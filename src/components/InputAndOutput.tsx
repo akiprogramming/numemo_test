@@ -69,7 +69,10 @@ function formatCommaNumber(num: number) {
   return num.toLocaleString("en-US");
 }
 
-export function Input({ numemoInput, setNumemoInputs = (e) => {} }: Props) {
+export function InputAndOutput({
+  numemoInput,
+  setNumemoInputs = (e) => {},
+}: Props) {
   const outputArray = toOutputArray(numemoInput.content);
   const output = toOutput(outputArray);
   const sum = calculate(outputArray);

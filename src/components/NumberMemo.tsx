@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
-import { Input as InputAndOutput, NumemoInput } from "components/Input";
+import { InputAndOutput, NumemoInput } from "components/InputAndOutput";
 import { Keyboard } from "components/Keyboard";
 
 const NUMEMO_INPUTS: NumemoInput[] = [
