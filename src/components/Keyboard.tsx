@@ -1,7 +1,7 @@
 import { Dispatch, memo, SetStateAction, useCallback } from "react";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import { TbEqual } from "react-icons/tb";
-import { NumemoInput } from "components/Input";
+import { NumemoInput } from "components/InputAndOutput";
 import produce from "immer";
 
 type Props = {
