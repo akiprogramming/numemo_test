@@ -29,7 +29,7 @@ const App: FC = () => {
   }, [hash, pathname]);
 
   return (
-    <div className="App h-screen overflow-hidden">
+    <div className="App h-screen">
       <Header />
       <Routes>
         <Route path="/" element={<Content />}>
