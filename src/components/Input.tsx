@@ -69,12 +69,12 @@ export function Input({ input, handleChange = (e) => {} }: Props) {
     <div className="container mx-auto max-w-xl">
       <input
         type="text"
-        className="w-full rounded-full bg-blue-200 px-3 py-2"
+        className="mb-1 w-full rounded-full bg-blue-200 px-3 py-2"
         placeholder="ここに計算をメモしてください"
         value={output}
         onChange={handleChange}
       />
-      <div className="mt-5 w-full rounded-full bg-blue-400 px-3 py-2 text-gray-700">
+      <div className="mb-3 w-full rounded-full bg-blue-400 px-3 py-2 text-gray-700">
         {sum !== null ? formatCommaNumber(sum) : "　"}
       </div>
     </div>
