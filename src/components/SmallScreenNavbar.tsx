@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { NavbarLinks } from "components/NavbarLinks";
 import { motion } from "framer-motion";
 import { MenuButton } from "components/MenuButton";
 
-export function SmallScreenNavbar() {
+export const SmallScreenNavbar = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
   const menuButtonStyle = {
     marginLeft: "2rem",
@@ -48,4 +48,4 @@ export function SmallScreenNavbar() {
       )}
     </div>
   );
-}
+});

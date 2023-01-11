@@ -29,7 +29,7 @@ export const NavbarLinks: FC<{
         return (
           <NavLink
             to={v.path}
-            className={`mr-5 capitalize duration-300 ease-in-out hover:text-blue-400 ${className}`}
+            className={`capitalize duration-300 ease-in-out hover:text-blue-400 ${className}`}
             key={v.path}
             // style={({ isActive }) =>
             //   isActive ? activeStyle : undefined
