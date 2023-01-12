@@ -2,10 +2,16 @@ import { chakra } from "@chakra-ui/react";
 import { Box, Text } from "@chakra-ui/react";
 
 const ROADMAP_TASKS = [
-  { name: "キーボード幅調整", done: true },
+  { name: "キーボード幅自動調整", done: true },
   { name: "ローカルDB保存", done: false },
   { name: "ログイン/DB保存", done: false },
   { name: "キーボード並び順カスタム", done: false },
+  { name: "ダークモード対応", done: false },
+  { name: "小数点対応", done: false },
+  { name: "カッコ対応", done: false },
+  { name: "コメント対応", done: false },
+  { name: "変数対応", done: false },
+  { name: "タブ機能", done: false },
 ];
 
 export function AboutPage() {
@@ -24,7 +30,7 @@ export function AboutPage() {
         <chakra.h1 fontSize="lg" className="font-bold">
           Numemo(ぬめも）とは
         </chakra.h1>
-        <Text>主にスマホでの数をメモするのに特化しています（予定）</Text>
+        <Text>数をメモします</Text>
         <Text className="text-lg font-bold">Roadmap</Text>
         <ul>
           {ROADMAP_TASKS.map((task) => {
@@ -33,11 +39,16 @@ export function AboutPage() {
                 <input
                   key={task.name}
                   type="checkbox"
-                  className={` mr-2  ${task.done ? "line-through" : ""}`}
+                  className="mr-2"
                   defaultChecked={task.done}
                   readOnly
                 />
-                {task.name}
+                <label
+                  htmlFor=""
+                  className={`${task.done ? "line-through" : ""}`}
+                >
+                  {task.name}
+                </label>
               </li>
             );
           })}
