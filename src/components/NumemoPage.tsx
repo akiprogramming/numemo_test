@@ -25,7 +25,7 @@ export function NumemoPage() {
     const editingInput = numemoInputs.find((nInput) => nInput.isEditing);
     if (editingInput) {
       const editingInputRef = refs.get(editingInput.id);
-      editingInputRef?.current?.focus();
+      // editingInputRef?.current?.focus();
       editingInputRef?.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [numemoInputs]);
