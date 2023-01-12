@@ -15,7 +15,7 @@ function NumberMemo() {
 
   return (
     <>
-      <div style={numemoListMaxHeightStyle} className={`overflow-y-auto`}>
+      <div style={numemoListMaxHeightStyle} className="overflow-y-auto py-1">
         {numemoInputs.map((inputItem) => {
           return (
             <InputAndOutput
