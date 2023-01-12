@@ -3,6 +3,7 @@ import { InputAndOutput, NumemoInput } from "components/InputAndOutput";
 import { Keyboard } from "components/Keyboard";
 import { NUMEMO_INPUTS } from "mock/numemoData";
 import { useHeaderAndKeyboardResizeObserver } from "hooks/CustomHooks";
+import { isPC } from "utils/helper";
 
 export function NumemoPage() {
   const [numemoInputs, setNumemoInputs] =
@@ -20,12 +21,10 @@ export function NumemoPage() {
   }, [numemoInputs]);
 
   useEffect(() => {
-    console.log("inputs changed side effect", numemoInputs);
-
     const editingInput = numemoInputs.find((nInput) => nInput.isEditing);
     if (editingInput) {
       const editingInputRef = refs.get(editingInput.id);
-      // editingInputRef?.current?.focus();
+      if (isPC()) editingInputRef?.current?.focus();
       editingInputRef?.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [numemoInputs]);
