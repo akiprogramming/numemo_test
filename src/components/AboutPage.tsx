@@ -8,7 +8,7 @@ const ROADMAP_TASKS = [
   { name: "キーボード並び順カスタム", done: false },
 ];
 
-function About() {
+export function AboutPage() {
   return (
     <div className="mx-auto max-w-4xl select-none">
       <Text
@@ -46,5 +46,3 @@ function About() {
     </div>
   );
 }
-
-export default About;

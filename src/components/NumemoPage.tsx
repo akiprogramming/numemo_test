@@ -4,7 +4,7 @@ import { Keyboard } from "components/Keyboard";
 import { NUMEMO_INPUTS } from "mock/numemoData";
 import { useHeaderAndKeyboardResizeObserver } from "hooks/CustomHooks";
 
-function NumberMemo() {
+export function NumemoPage() {
   const [numemoInputs, setNumemoInputs] =
     useState<NumemoInput[]>(NUMEMO_INPUTS);
   const { keyboardHeight, headerHeight } = useHeaderAndKeyboardResizeObserver();
@@ -30,5 +30,3 @@ function NumberMemo() {
     </>
   );
 }
-
-export default NumberMemo;

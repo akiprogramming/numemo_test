@@ -9,11 +9,11 @@ import {
   Outlet,
 } from "react-router-dom";
 import "App.css";
-import About from "components/About";
-import NumberMemo from "components/NumberMemo";
+import { AboutPage } from "components/AboutPage";
+import { NumemoPage } from "components/NumemoPage";
 import { Header } from "components/Header";
 
-const Content = () => {
+const PageContainer = () => {
   return (
     <div className="mx-auto p-3">
       <Outlet />
@@ -32,9 +32,9 @@ const App: FC = () => {
     <div className="App h-screen">
       <Header />
       <Routes>
-        <Route path="/" element={<Content />}>
-          <Route index element={<NumberMemo />} />
-          <Route path="about" element={<About />} />
+        <Route path="/" element={<PageContainer />}>
+          <Route index element={<NumemoPage />} />
+          <Route path="about" element={<AboutPage />} />
         </Route>
       </Routes>
     </div>
