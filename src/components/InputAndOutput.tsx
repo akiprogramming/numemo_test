@@ -56,8 +56,8 @@ function calculate(input: string[]): number | null {
     /^([0-9]+[\+\-\*\/~\(\)\{\}\.])+[0-9]+$/
   );
 
-  console.log(inputStr);
-  console.log(isCorrectExpression);
+  // console.log(inputStr);
+  // console.log(isCorrectExpression);
 
   if (!isCorrectExpression) return null;
   const sum = Function("return (" + inputStr + ");")();

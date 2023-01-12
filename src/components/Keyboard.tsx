@@ -1,8 +1,9 @@
-import { Dispatch, memo, SetStateAction, useCallback } from "react";
+import { Dispatch, memo, SetStateAction, useCallback, useMemo } from "react";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import { TbEqual } from "react-icons/tb";
 import { NumemoInput } from "components/InputAndOutput";
 import produce from "immer";
+import { KeyboardButton, KeyboardButtonProps } from "./KeyboardButton";
 
 type Props = {
   setData: Dispatch<SetStateAction<NumemoInput[]>>;
@@ -16,7 +17,7 @@ const btnDisplayOrder = [
 ];
 
 export const Keyboard = memo(({ setData }: Props) => {
-  const handleClickKeyboard = useCallback((pressedString: string) => {
+  const handleClickAddString = useCallback((pressedString: string) => {
     setData(
       produce((draft) => {
         const editingNumemoInput = draft.find((nInput) => nInput.isEditing);
@@ -27,93 +28,81 @@ export const Keyboard = memo(({ setData }: Props) => {
     );
   }, []);
 
+  const handleClickReset = useCallback(() => {
+    setData(
+      produce((draft) => {
+        const targetInput = draft.find((v) => v.isEditing);
+        if (targetInput) targetInput.content = "";
+      })
+    );
+  }, []);
+
+  const handleClickBackSpace = useCallback(() => {
+    setData(
+      produce((draft) => {
+        const targetInput = draft.find((v) => v.isEditing);
+        if (targetInput)
+          targetInput.content = targetInput.content.slice(
+            0,
+            targetInput.content.length - 1
+          );
+      })
+    );
+  }, []);
+
+  const handleClickEqual = useCallback(() => {
+    setData(
+      produce((draft) => {
+        const targetInput = draft.find((v) => v.isEditing);
+        if (targetInput) targetInput.isEditing = false;
+        const newInput: NumemoInput = {
+          id: crypto.randomUUID(),
+          content: "",
+          isEditing: true,
+          createdAt: Date(),
+        };
+        draft.push(newInput);
+      })
+    );
+  }, []);
+
+  const KeyboardButtonArgs: KeyboardButtonProps[] = useMemo(() => {
+    return btnDisplayOrder.map((btn, i) => {
+      let pressFunc;
+      let label: string | JSX.Element = btn;
+      switch (btn) {
+        case "C":
+          pressFunc = handleClickReset;
+          break;
+        case "B":
+          pressFunc = handleClickBackSpace;
+          label = <RiDeleteBack2Line className="mx-auto max-h-fit max-w-fit" />;
+          break;
+        case "=":
+          pressFunc = handleClickEqual;
+          label = <TbEqual className="mx-auto max-h-fit max-w-fit" />;
+          break;
+        case " ":
+        case "":
+          pressFunc = () => {};
+          break;
+        default:
+          pressFunc = () => handleClickAddString(btn);
+          break;
+      }
+      return {
+        name: btn,
+        label,
+        pressFunc,
+      };
+    });
+  }, [btnDisplayOrder]);
+
   return (
     <div className="fixed left-1/2 bottom-0 aspect-[6/4] w-full max-w-xl translate-x-[-50%] select-none bg-white p-2 text-sm text-slate-600 sm:text-lg  md:text-xl">
       <div className="grid h-full w-full grid-cols-6 grid-rows-4 items-center gap-2">
-        {btnDisplayOrder.map((btn, i) => {
-          switch (btn) {
-            case "C":
-              return (
-                <button
-                  key={btn}
-                  onClick={() => {
-                    setData(
-                      produce((draft) => {
-                        const targetInput = draft.find((v) => v.isEditing);
-                        if (targetInput) targetInput.content = "";
-                      })
-                    );
-                  }}
-                  className="h-full w-full rounded-xl bg-neutral-100 shadow-md transition-all active:bg-neutral-50 active:shadow-none"
-                >
-                  {btn}
-                </button>
-              );
-            case "B":
-              return (
-                <button
-                  key={btn}
-                  onClick={() => {
-                    setData(
-                      produce((draft) => {
-                        const targetInput = draft.find((v) => v.isEditing);
-                        if (targetInput)
-                          targetInput.content = targetInput.content.slice(
-                            0,
-                            targetInput.content.length - 1
-                          );
-                      })
-                    );
-                  }}
-                  className="h-full w-full rounded-xl bg-neutral-100 shadow-md transition-all active:bg-neutral-50 active:shadow-none"
-                >
-                  <RiDeleteBack2Line className="mx-auto max-h-fit max-w-fit" />
-                </button>
-              );
-            case "=":
-              return (
-                <button
-                  key={btn}
-                  onClick={() => {
-                    setData(
-                      produce((draft) => {
-                        const targetInput = draft.find((v) => v.isEditing);
-                        if (targetInput) targetInput.isEditing = false;
-                        const newInput: NumemoInput = {
-                          id: crypto.randomUUID(),
-                          content: "",
-                          isEditing: true,
-                          createdAt: Date(),
-                        };
-                        draft.push(newInput);
-                      })
-                    );
-                  }}
-                  className="h-full w-full rounded-xl bg-neutral-100 shadow-md transition-all active:bg-neutral-50 active:shadow-none"
-                >
-                  <TbEqual className="mx-auto max-h-fit max-w-fit" />
-                </button>
-              );
-            case " ":
-            case "":
-              return (
-                <button
-                  disabled
-                  key={`empty${i}`}
-                  className=" mx-auto h-full w-full rounded-xl bg-slate-200 shadow-md transition-all active:shadow-none"
-                ></button>
-              );
-            default:
-              return (
-                <button
-                  key={`btn${btn}`}
-                  onClick={() => handleClickKeyboard(btn)}
-                  className="mx-auto h-full w-full rounded-xl bg-neutral-100 shadow-md transition-all active:bg-neutral-50 active:shadow-none"
-                >
-                  {btn}
-                </button>
-              );
-          }
+        {KeyboardButtonArgs.map((btnArg, i) => {
+          return <KeyboardButton key={i} {...btnArg} />;
         })}
       </div>
     </div>
