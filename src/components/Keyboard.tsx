@@ -4,6 +4,7 @@ import { TbEqual } from "react-icons/tb";
 import { NumemoInput } from "components/InputAndOutput";
 import produce from "immer";
 import { KeyboardButton, KeyboardButtonProps } from "./KeyboardButton";
+import { getSumWithComma } from "utils/numemoFormat";
 
 type Props = {
   setData: Dispatch<SetStateAction<NumemoInput[]>>;
@@ -55,9 +56,11 @@ export const Keyboard = memo(({ setData }: Props) => {
       produce((draft) => {
         const targetInput = draft.find((v) => v.isEditing);
         if (targetInput) targetInput.isEditing = false;
+
+        const lastInputContent = targetInput?.content ?? "";
         const newInput: NumemoInput = {
           id: crypto.randomUUID(),
-          content: "",
+          content: getSumWithComma(lastInputContent),
           isEditing: true,
           createdAt: Date(),
         };
