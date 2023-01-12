@@ -22,3 +22,32 @@ export const useWindowWidthAndHeight = () => {
   // 5- return the window size
   return windowSize;
 };
+
+export const useHeaderAndKeyboardResizeObserver = () => {
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      setHeaderHeight(entries[0].contentRect.height);
+      setKeyboardHeight(entries[1].borderBoxSize[0].blockSize);
+    });
+
+    const headerElm = document.getElementById("header");
+    const keyboardElm = document.getElementById("keyboard-container");
+
+    if (headerElm && keyboardElm) {
+      observer.observe(headerElm);
+      observer.observe(keyboardElm);
+    }
+
+    return () => {
+      if (headerElm && keyboardElm) {
+        observer.unobserve(headerElm);
+        observer.unobserve(keyboardElm);
+      }
+    };
+  }, [headerHeight, keyboardHeight]);
+
+  return { headerHeight, keyboardHeight };
+};

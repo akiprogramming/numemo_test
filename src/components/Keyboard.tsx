@@ -99,7 +99,10 @@ export const Keyboard = memo(({ setData }: Props) => {
   }, [btnDisplayOrder]);
 
   return (
-    <div className="fixed left-1/2 bottom-0 aspect-[6/4] w-full max-w-xl translate-x-[-50%] select-none bg-white p-2 text-sm text-slate-600 sm:text-lg  md:text-xl">
+    <div
+      id="keyboard-container"
+      className="fixed left-1/2 bottom-0 aspect-[6/4] w-full max-w-xl translate-x-[-50%] select-none bg-white p-2 text-sm text-slate-600 sm:text-lg  md:text-xl"
+    >
       <div className="grid h-full w-full grid-cols-6 grid-rows-4 items-center gap-2">
         {KeyboardButtonArgs.map((btnArg, i) => {
           return <KeyboardButton key={i} {...btnArg} />;
