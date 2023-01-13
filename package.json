@@ -12,6 +12,8 @@
     "@chakra-ui/react": "^2.4.5",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "dexie": "^3.2.2",
+    "dexie-react-hooks": "^1.1.1",
     "framer-motion": "^8.1.9",
     "immer": "^9.0.17",
     "react": "^18.2.0",
