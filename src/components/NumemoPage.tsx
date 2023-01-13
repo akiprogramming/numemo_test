@@ -1,14 +1,25 @@
 import { createRef, RefObject, useEffect, useMemo, useState } from "react";
-import { InputAndOutput, NumemoInput } from "components/InputAndOutput";
+import { InputAndOutput } from "components/InputAndOutput";
 import { Keyboard } from "components/Keyboard";
-import { NUMEMO_INPUTS } from "mock/numemoData";
+import { bulkAddMockData, NUMEMO_INPUTS } from "mock/numemoData";
 import { useHeaderAndKeyboardResizeObserver } from "hooks/CustomHooks";
 import { isPC } from "utils/helper";
+import { db, NumemoInput } from "db";
+import { useLiveQuery } from "dexie-react-hooks";
+
+const TMP_TAB_ID = "test tab 1";
 
 export function NumemoPage() {
-  const [numemoInputs, setNumemoInputs] =
-    useState<NumemoInput[]>(NUMEMO_INPUTS);
+  const [numemoInputs, setNumemoInputs] = useState<NumemoInput[]>([]);
   const { keyboardHeight, headerHeight } = useHeaderAndKeyboardResizeObserver();
+  // const numemo = useLiveQuery(async () => {
+  //   console.log("use query");
+
+  //   const inputs = await db.numemoInputs.toArray();
+  //   console.log(inputs);
+  //   // if (inputs) setNumemoInputs(inputs);
+  //   return inputs;
+  // }, [numemoInputs]);
 
   const numemoListMaxHeightStyle = {
     maxHeight: `calc(100vh - ${keyboardHeight + headerHeight}px`,
@@ -21,12 +32,68 @@ export function NumemoPage() {
   }, [numemoInputs]);
 
   useEffect(() => {
+    console.log("Numemo Page Mounted");
+
+    // TODO: タブ機能実装後削除
+    async function addInitialTab() {
+      try {
+        await db.tabs.add({
+          id: TMP_TAB_ID,
+          isEditing: true,
+          numemoInputIds: [],
+          inputs: [],
+        });
+      } catch (error) {
+        console.warn(error);
+      }
+    }
+
+    addInitialTab();
+
+    return console.log("Numemo Page Unmounted");
+  });
+
+  useEffect(() => {
+    async function getInitialNumemoInputs() {
+      const initialNumemoTab = await db.tabs
+        .where("id")
+        .equals(TMP_TAB_ID)
+        .first();
+
+      const initialNumemoInputs = initialNumemoTab?.inputs;
+
+      console.log(initialNumemoInputs);
+      if (initialNumemoInputs) setNumemoInputs(initialNumemoInputs);
+    }
+
+    getInitialNumemoInputs();
+    // getInitialNumemoInputs();
+  }, []);
+
+  useEffect(() => {
     const editingInput = numemoInputs.find((nInput) => nInput.isEditing);
     if (editingInput) {
       const editingInputRef = refs.get(editingInput.id);
       if (isPC()) editingInputRef?.current?.focus();
       editingInputRef?.current?.scrollIntoView({ behavior: "smooth" });
     }
+
+    async function updateLocalDb() {
+      const existingStateNumemoInputKeys = numemoInputs.map(
+        (nInput) => nInput.id
+      );
+
+      const targetTab = await db.tabs.where("id").equals(TMP_TAB_ID).first();
+      console.log(targetTab);
+
+      if (targetTab) {
+        targetTab.inputs = numemoInputs;
+        targetTab.numemoInputIds = existingStateNumemoInputKeys;
+        await db.tabs.put(targetTab);
+      }
+    }
+
+    updateLocalDb();
   }, [numemoInputs]);
 
   return (

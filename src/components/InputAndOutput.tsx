@@ -1,14 +1,8 @@
+import { NumemoInput } from "db";
 import produce from "immer";
 import { Dispatch, forwardRef, SetStateAction, useCallback } from "react";
 import { IoMdClose } from "react-icons/io";
 import { getOutput, getSumWithComma } from "utils/numemoFormat";
-
-export type NumemoInput = {
-  id: string;
-  content: string;
-  createdAt: string;
-  isEditing: boolean;
-};
 
 type Props = {
   numemoInput: NumemoInput;

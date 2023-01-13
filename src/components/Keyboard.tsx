@@ -1,7 +1,7 @@
 import { Dispatch, memo, SetStateAction, useCallback, useMemo } from "react";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import { TbEqual } from "react-icons/tb";
-import { NumemoInput } from "components/InputAndOutput";
+import { NumemoInput } from "db";
 import produce from "immer";
 import { KeyboardButton, KeyboardButtonProps } from "./KeyboardButton";
 import { getSumWithComma } from "utils/numemoFormat";
@@ -63,6 +63,7 @@ export const Keyboard = memo(({ setData }: Props) => {
           content: getSumWithComma(lastInputContent),
           isEditing: true,
           createdAt: Date(),
+          sortNum: draft.length,
         };
         draft.push(newInput);
       })
