@@ -57,7 +57,7 @@ export const Header = memo(() => {
           </div>
         </div>
       </header>
-      {width < MD_SCREEN_WIDTH && isMenuOpen ? (
+      {width <= MD_SCREEN_WIDTH && isMenuOpen ? (
         <LinkMenu setIsOpen={setIsMenuOpen} />
       ) : null}
     </div>
