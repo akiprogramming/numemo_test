@@ -1,5 +1,5 @@
 import { chakra } from "@chakra-ui/react";
-import { Box, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 
 const ROADMAP_TASKS = [
   { name: "キーボード幅自動調整", done: true },

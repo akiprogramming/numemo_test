@@ -1,13 +1,5 @@
-import { useState } from "react";
 import { FC, useEffect } from "react";
-import {
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-  Link,
-  Outlet,
-} from "react-router-dom";
+import { Route, Routes, useLocation, Outlet } from "react-router-dom";
 import "App.css";
 import { AboutPage } from "components/AboutPage";
 import { NumemoPage } from "components/NumemoPage";

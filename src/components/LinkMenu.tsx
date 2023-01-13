@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState, memo } from "react";
+import { Dispatch, SetStateAction, memo } from "react";
 import { NavbarLinks } from "components/NavbarLinks";
 
 type Props = {

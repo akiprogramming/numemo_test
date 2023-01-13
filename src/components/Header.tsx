@@ -1,9 +1,8 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useWindowWidthAndHeight } from "hooks/CustomHooks";
 import { NavbarLinks } from "components/NavbarLinks";
-import { SmallScreenNavbar } from "components/SmallScreenNavbar";
 import { MenuButton } from "./MenuButton";
-import { Dispatch, memo, SetStateAction, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { LinkMenu } from "components/LinkMenu";
 
 const MD_SCREEN_WIDTH = 700;
