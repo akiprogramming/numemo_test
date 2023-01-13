@@ -1,7 +1,6 @@
 import { createRef, RefObject, useEffect, useMemo, useState } from "react";
 import { InputAndOutput } from "components/InputAndOutput";
 import { Keyboard } from "components/Keyboard";
-import { bulkAddMockData, NUMEMO_INPUTS } from "mock/numemoData";
 import { useHeaderAndKeyboardResizeObserver } from "hooks/CustomHooks";
 import { isPC } from "utils/helper";
 import { db, NumemoInput } from "db";
