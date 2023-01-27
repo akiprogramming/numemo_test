@@ -46,7 +46,7 @@ export const Keyboard = memo(({ setData }: Props) => {
       produce((draft) => {
         const targetInput = draft.find((v) => v.isEditing);
         if (targetInput) {
-          const isLastStringWhiteSpace = targetInput.content.slice(-1) === " ";
+          const isLastStringWhiteSpace = /\s$/.test(targetInput.content);
 
           targetInput.content = targetInput.content.slice(
             0,
