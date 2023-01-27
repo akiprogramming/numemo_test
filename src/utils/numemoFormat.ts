@@ -1,10 +1,11 @@
 import { canBeNumber } from "utils/number";
 
+const regexFirstMatchedNumber = /^(0|[1-9][0-9]*)(\.[0-9]+)?/;
+const regexFirstMatchedMathOperation = /^[+-/*//]/;
+const regexFirstMatchedJustStrings = /^[^0-9\s+-/*//]+/;
+
 export function splitInputIntoNumemoArray(input: string): string[] {
   let targetInput = formatForCalc(input);
-
-  const regexFirstMatchedNumber = /^(0|[1-9][0-9]*)(\.[0-9]+)?/;
-  const regexFirstMatchedMathOperation = /^[+-/*//]/;
 
   let outputArray = [];
   while (targetInput) {
@@ -16,8 +17,13 @@ export function splitInputIntoNumemoArray(input: string): string[] {
     const firstMatchedMathOperation = trimmedInput.match(
       regexFirstMatchedMathOperation
     );
+    const firstMatchedJustStrings = trimmedInput.match(
+      regexFirstMatchedJustStrings
+    );
     const extractTarget =
-      firstMatchedNumber?.[0] ?? firstMatchedMathOperation?.[0];
+      firstMatchedNumber?.[0] ??
+      firstMatchedMathOperation?.[0] ??
+      firstMatchedJustStrings?.[0];
     // console.log("ext:", extractTarget);
     if (!extractTarget) break;
     targetInput = targetInput.replace(extractTarget, "");
@@ -37,7 +43,7 @@ export function splitInputIntoNumemoArray(input: string): string[] {
     outputArray.push(extractTarget);
   }
   //   console.countReset("loop");
-  //   console.log(outputArray);
+  // console.log(outputArray);
   return outputArray;
 }
 
@@ -60,7 +66,11 @@ export function toOutput(input: string[]): string {
 
 export function calculate(input: string[]): number | null {
   if (!input.length) return null;
-  const inputStr = input.join("");
+  const inputWithoutString = input.filter(
+    (v) =>
+      regexFirstMatchedNumber.test(v) || regexFirstMatchedMathOperation.test(v)
+  );
+  const inputStr = inputWithoutString.join("");
   const isCorrectExpression = inputStr.match(
     /^([0-9]+[\+\-\*\/~\(\)\{\}\.])+[0-9]+$/
   );
