@@ -55,9 +55,11 @@ export const Keyboard = memo(({ setData }: Props) => {
     setData(
       produce((draft) => {
         const targetInput = draft.find((v) => v.isEditing);
+        const lastInputContent = targetInput?.content ?? "";
+        if (lastInputContent === "") return;
+
         if (targetInput) targetInput.isEditing = false;
 
-        const lastInputContent = targetInput?.content ?? "";
         const newInput: NumemoInput = {
           id: crypto.randomUUID(),
           content: getSumWithComma(lastInputContent),
