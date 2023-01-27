@@ -2,7 +2,7 @@ import { NumemoInput } from "db";
 import produce from "immer";
 import { Dispatch, forwardRef, SetStateAction, useCallback } from "react";
 import { IoMdClose } from "react-icons/io";
-import { getOutput, getSumWithComma } from "utils/numemoFormat";
+import { getValidOutput, getSumWithComma } from "utils/numemoFormat";
 
 type Props = {
   numemoInput: NumemoInput;
@@ -11,7 +11,7 @@ type Props = {
 
 export const InputAndOutput = forwardRef<HTMLInputElement, Props>(
   ({ numemoInput, setNumemoInputs = (e) => {} }: Props, ref) => {
-    const output = getOutput(numemoInput.content);
+    const output = getValidOutput(numemoInput.content);
     const sumWithComma = getSumWithComma(numemoInput.content);
     const { isEditing } = numemoInput;
 
