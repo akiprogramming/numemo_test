@@ -44,7 +44,7 @@ export function splitInputIntoNumemoArray(input: string): string[] {
 export function formatForCalc(input: string): string {
   let formattedString = input.replaceAll("×", "*");
   formattedString = formattedString.replaceAll("÷", "/");
-  // formattedString = formattedString.replaceAll(",", "");
+  formattedString = formattedString.replaceAll(",", ""); // 桁が多い場合のカンマ
   return formattedString;
 }
 
