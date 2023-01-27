@@ -51,7 +51,7 @@ export const InputAndOutput = forwardRef<HTMLInputElement, Props>(
         produce((draft) => {
           const typedInput = e.target.value;
           const targetInput = draft.find((nInput) => nInput.isEditing);
-          if (targetInput) targetInput.content = typedInput;
+          if (targetInput) targetInput.content = getValidOutput(typedInput);
         })
       );
     }, []);

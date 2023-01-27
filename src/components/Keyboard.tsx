@@ -4,7 +4,7 @@ import { TbEqual } from "react-icons/tb";
 import { NumemoInput } from "db";
 import produce from "immer";
 import { KeyboardButton, KeyboardButtonProps } from "./KeyboardButton";
-import { getSumWithComma } from "utils/numemoFormat";
+import { getSumWithComma, getValidOutput } from "utils/numemoFormat";
 
 type Props = {
   setData: Dispatch<SetStateAction<NumemoInput[]>>;
@@ -24,6 +24,9 @@ export const Keyboard = memo(({ setData }: Props) => {
         const editingNumemoInput = draft.find((nInput) => nInput.isEditing);
         if (editingNumemoInput) {
           editingNumemoInput.content += pressedString;
+          editingNumemoInput.content = getValidOutput(
+            editingNumemoInput.content
+          );
         }
       })
     );
@@ -42,11 +45,16 @@ export const Keyboard = memo(({ setData }: Props) => {
     setData(
       produce((draft) => {
         const targetInput = draft.find((v) => v.isEditing);
-        if (targetInput)
+        if (targetInput) {
+          const isLastStringWhiteSpace = targetInput.content.slice(-1) === " ";
+
           targetInput.content = targetInput.content.slice(
             0,
-            targetInput.content.length - 1
+            isLastStringWhiteSpace
+              ? targetInput.content.length - 2
+              : targetInput.content.length - 1
           );
+        }
       })
     );
   }, []);
