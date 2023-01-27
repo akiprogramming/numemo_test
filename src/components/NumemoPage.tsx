@@ -39,11 +39,18 @@ export function NumemoPage() {
         const tabCount = await db.tabs.count();
 
         if (!tabCount) {
+          const newInput: NumemoInput = {
+            id: crypto.randomUUID(),
+            content: "",
+            isEditing: true,
+            createdAt: Date(),
+            sortNum: 0,
+          };
           await db.tabs.add({
             id: TMP_TAB_ID,
             isEditing: true,
             numemoInputIds: [],
-            inputs: [],
+            inputs: [newInput],
           });
         }
       } catch (error) {
