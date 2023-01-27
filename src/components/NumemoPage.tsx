@@ -36,12 +36,16 @@ export function NumemoPage() {
     // TODO: タブ機能実装後削除
     async function addInitialTab() {
       try {
-        await db.tabs.add({
-          id: TMP_TAB_ID,
-          isEditing: true,
-          numemoInputIds: [],
-          inputs: [],
-        });
+        const tabCount = await db.tabs.count();
+
+        if (!tabCount) {
+          await db.tabs.add({
+            id: TMP_TAB_ID,
+            isEditing: true,
+            numemoInputIds: [],
+            inputs: [],
+          });
+        }
       } catch (error) {
         console.warn(error);
       }
@@ -50,7 +54,7 @@ export function NumemoPage() {
     addInitialTab();
 
     return console.log("Numemo Page Unmounted");
-  });
+  }, []);
 
   useEffect(() => {
     async function getInitialNumemoInputs() {
