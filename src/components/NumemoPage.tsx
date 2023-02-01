@@ -46,12 +46,16 @@ export function NumemoPage() {
             createdAt: Date(),
             sortNum: 0,
           };
-          await db.tabs.add({
+          const tabId = await db.tabs.add({
             id: TMP_TAB_ID,
             isEditing: true,
             numemoInputIds: [],
             inputs: [newInput],
           });
+
+          const tab = await db.tabs.where("id").equals(TMP_TAB_ID).first();
+
+          setNumemoInputs(tab?.inputs ?? []);
         }
       } catch (error) {
         console.warn(error);
