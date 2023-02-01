@@ -3,6 +3,7 @@ import produce from "immer";
 import { Dispatch, forwardRef, SetStateAction, useCallback } from "react";
 import { IoMdClose } from "react-icons/io";
 import { getValidOutput, getSumWithComma } from "utils/numemoFormat";
+import { pressEqual } from "utils/numemoInputsUpdate";
 
 type Props = {
   numemoInput: NumemoInput;
@@ -56,6 +57,16 @@ export const InputAndOutput = forwardRef<HTMLInputElement, Props>(
       );
     }, []);
 
+    const handleClickEqual = useCallback(pressEqual(setNumemoInputs), []);
+
+    const handleKeyDown = useCallback(
+      (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.nativeEvent.isComposing || e.key !== "Enter") return;
+        handleClickEqual();
+      },
+      []
+    );
+
     return (
       <div className={"container mx-auto flex max-w-xl flex-row "}>
         <div className="w-full" onClick={handleClick}>
@@ -68,6 +79,7 @@ export const InputAndOutput = forwardRef<HTMLInputElement, Props>(
             placeholder="ここに計算をメモしてください"
             value={output}
             onChange={handleType}
+            onKeyDown={handleKeyDown}
           />
           <div
             className={`mb-3 w-full rounded-full bg-blue-400 px-3 py-2 text-gray-700 ${

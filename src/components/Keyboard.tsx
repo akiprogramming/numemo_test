@@ -4,7 +4,8 @@ import { TbEqual } from "react-icons/tb";
 import { NumemoInput } from "db";
 import produce from "immer";
 import { KeyboardButton, KeyboardButtonProps } from "./KeyboardButton";
-import { getSumWithComma, getValidOutput } from "utils/numemoFormat";
+import { getValidOutput } from "utils/numemoFormat";
+import { pressEqual } from "utils/numemoInputsUpdate";
 
 type Props = {
   setData: Dispatch<SetStateAction<NumemoInput[]>>;
@@ -59,26 +60,7 @@ export const Keyboard = memo(({ setData }: Props) => {
     );
   }, []);
 
-  const handleClickEqual = useCallback(() => {
-    setData(
-      produce((draft) => {
-        const targetInput = draft.find((v) => v.isEditing);
-        const lastInputContent = targetInput?.content ?? "";
-        if (lastInputContent === "") return;
-
-        if (targetInput) targetInput.isEditing = false;
-
-        const newInput: NumemoInput = {
-          id: crypto.randomUUID(),
-          content: getSumWithComma(lastInputContent),
-          isEditing: true,
-          createdAt: Date(),
-          sortNum: draft.length,
-        };
-        draft.push(newInput);
-      })
-    );
-  }, []);
+  const handleClickEqual = useCallback(pressEqual(setData), []);
 
   const KeyboardButtonArgs: KeyboardButtonProps[] = useMemo(() => {
     return btnDisplayOrder.map((btn, i) => {
