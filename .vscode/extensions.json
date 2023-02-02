@@ -3,6 +3,7 @@
     "csstools.postcss",
     "bradlc.vscode-tailwindcss",
     "wayou.vscode-todo-highlight",
-    "gruntfuggly.todo-tree"
+    "gruntfuggly.todo-tree",
+    "zixuanchen.vitest-explorer"
   ]
 }
