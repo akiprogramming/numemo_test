@@ -15,7 +15,7 @@ export default defineConfig(({ command, mode }) => {
   // ICON Generator: https://tools.crawlink.com/tools/pwa-icon-generator/
   // Favicon Generator: https://realfavicongenerator.net/
   const pwaOptions: Partial<VitePWAOptions> = {
-    registerType: "prompt",
+    registerType: "autoUpdate",
     includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
     manifest: {
       name: "NUMEMO",
